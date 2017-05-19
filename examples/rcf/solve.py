@@ -40,7 +40,7 @@ base_weights = '5stage-vgg.caffemodel'
 
 # init
 caffe.set_mode_gpu()
-caffe.set_device(0)
+caffe.set_device(7)
 
 solver = caffe.SGDSolver('solver.prototxt')
 
