@@ -5,6 +5,10 @@ code_path=~/codes/rcf/examples/rcf_building_edge
 file_list=trainval_aug.txt
 gpuid=1
 
+cd ${code_path}
+git pull
+cd -
+
 cp ${code_path}/RCF_singlescale.py .
 cp ${code_path}/pre_building_edges.py .
 cp ${code_path}/test.prototxt .

@@ -12,8 +12,10 @@ from __future__ import division
 import numpy as np
 import sys,os
 
-sys.path.insert(0, '../../')
-sys.path.insert(0, '../../examples/rcf_building_edge')
+HOME = os.path.expanduser('~')
+
+sys.path.insert(0, HOME+'/codes/rcf')
+sys.path.insert(0, HOME+'/codes/rcf/examples/rcf_building_edge')
 
 import basic.basic as basic
 import basic.io_function as io_function
