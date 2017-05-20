@@ -163,7 +163,7 @@ def main(options, args):
         edgethr = options.edgeThr
     edge_map_list =RCF_singlescale.produce_edge_map(input_list,save_root,gpuid=gpuid, edgeThr=edgethr)
 
-    save_txt = os.path.join(os.path.split(building_list)[0], 'edge_map.txt')
+    save_txt = os.path.join(os.getcwd(), 'edge_map.txt')
     fw_obj = open(save_txt, 'w')
     for i in range(0,len(train_data)):
         fw_obj.writelines('%s %s\n' % (train_data[i].image, edge_map_list[i]))
