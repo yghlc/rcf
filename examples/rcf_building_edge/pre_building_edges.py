@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+# Filename:
+"""
+introduction:
+
+authors: Huang Lingcao
+email:huanglingcao@gmail.com
+add time: 20 May, 2017
+"""
 
 from __future__ import division
 import numpy as np
@@ -166,6 +175,9 @@ if __name__=='__main__':
 
     parser.add_option("-t", "--edgeThr", action="store", dest="edgeThr",type='int',
                       help="Pixel value which is smaller than edgeThr will be set as 0, it means edge")
+
+    if len(sys.argv) < 2:
+        parser.print_help()
 
     (options, args) = parser.parse_args()
     main(options, args)
