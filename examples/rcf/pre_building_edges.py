@@ -99,7 +99,7 @@ def convert_groudT_to_groudEdge():
         im = Image.open(groundT)
         in_ = np.array(im, dtype=np.uint8)
         in_[np.where(in_ == 1)] = 0  # ignore building, only keep boundary
-        in_[np.where(in_ == 255)] = 254
+        in_[np.where(in_ == 255)] = 125
 
         w, h = in_.shape
         save_edge = np.empty((w, h,3),dtype=np.uint8)

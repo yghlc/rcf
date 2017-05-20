@@ -10,10 +10,10 @@ iter_size: 10
 stepsize: 10000
 display: 20
 average_loss: 50
-max_iter: 100000
+max_iter: 10000
 momentum: 0.9
 weight_decay: 0.0002
-snapshot: 10000
-snapshot_prefix: "snapshots/rcf_bsds"
+snapshot: 1000
+snapshot_prefix: "snapshots/rcf_bedge"
 # uncomment the following to default to CPU mode solving
 # solver_mode: CPU

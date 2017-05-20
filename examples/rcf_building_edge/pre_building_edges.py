@@ -3,9 +3,12 @@ from __future__ import division
 import numpy as np
 import sys,os
 
+sys.path.insert(0, '../../')
+
 import basic.basic as basic
 from PIL import Image
 import cv2
+
 
 
 class SampleClass(object):
@@ -96,6 +99,8 @@ def convert_groudT_to_groudEdge():
         img_edge = os.path.join(os.path.split(groundT)[0],train_data[i].id + '_edge.png')
         train_data[i].groundE = img_edge
 
+        print('buildings to edge : %d / %d'%(i,len(train_data)))
+
         im = Image.open(groundT)
         in_ = np.array(im, dtype=np.uint8)
         in_[np.where(in_ == 1)] = 0  # ignore building, only keep boundary
@@ -108,11 +113,19 @@ def convert_groudT_to_groudEdge():
 
     pass
 
-buidlding_list = 'buildings.txt'
-read_train_data(buidlding_list)
-convert_groudT_to_groudEdge()
+building_list = 'buildings.txt'
+print ('sys.argv',sys.argv)
+if len(sys.argv) == 2:
+    building_list = sys.argv[1]
 
-fw_obj = open('train_edge.txt','w')
+if read_train_data(building_list) is False:
+    exit(1)
+
+# if convert_groudT_to_groudEdge() is False:
+#     exit(1)
+
+save_txt = os.path.join(os.path.split(building_list)[0],'train_edge.txt')
+fw_obj = open(save_txt,'w')
 for item in train_data:
     fw_obj.writelines('%s %s\n'%(item.image,item.groundE))
 fw_obj.close()

@@ -7,6 +7,7 @@ caffe_root = '../../'
 sys.path.insert(0, caffe_root + 'python')
 import caffe
 
+
 # make a bilinear interpolation kernel
 # credit @longjon
 def upsample_filt(size):
@@ -39,8 +40,11 @@ def interp_surgery(net, layers):
 base_weights = 'rcf_pretrained_bsds.caffemodel'
 
 # init
+gpuid=1
+if len(sys.argv) == 2:
+    gpuid = int(sys.argv[1])
 caffe.set_mode_gpu()
-caffe.set_device(1)
+caffe.set_device(gpuid)
 
 solver = caffe.SGDSolver('solver.prototxt')
 
