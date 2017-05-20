@@ -4,15 +4,20 @@ import numpy as np
 import sys,os
 
 sys.path.insert(0, '../../')
+sys.path.insert(0, '../../examples/rcf_building_edge')
 
 import basic.basic as basic
+import basic.io_function as io_function
 from PIL import Image
 import cv2
 
+import RCF_singlescale
 
+from optparse import OptionParser
 
 class SampleClass(object):
     image = ''      # path of image
+    edge_map=''     # path of edge map produced by network
     groudT = ''     # path of groud image
     grounE = ''     # path of buidling edge
     id = ''         # file ID
@@ -113,19 +118,54 @@ def convert_groudT_to_groudEdge():
 
     pass
 
-building_list = 'buildings.txt'
-print ('sys.argv',sys.argv)
-if len(sys.argv) == 2:
-    building_list = sys.argv[1]
+def produce_edge_map(train_data):
+    if len(train_data) < 1:
+        basic.outputlogMessage('error, no input images')
+        return False
 
-if read_train_data(building_list) is False:
-    exit(1)
 
-# if convert_groudT_to_groudEdge() is False:
-#     exit(1)
 
-save_txt = os.path.join(os.path.split(building_list)[0],'train_edge.txt')
-fw_obj = open(save_txt,'w')
-for item in train_data:
-    fw_obj.writelines('%s %s\n'%(item.image,item.groundE))
-fw_obj.close()
+def main(options, args):
+    building_list = args[0]
+    if io_function.is_file_exist(building_list) is False:
+        return False
+
+    if read_train_data(building_list) is False:
+        return False
+
+    if len(train_data) < 1:
+        basic.outputlogMessage('error, no input images')
+        return False
+
+    # if convert_groudT_to_groudEdge() is False:
+    #     exit(1)
+    save_root='edge_map'
+    io_function.mkdir(save_root)
+    input_list = [item.image for item in train_data]
+    gpuid =0
+    edgethr = 100
+    if options.gpuid is not None:
+        gpuid = options.gpuid
+    if options.edgethr is not None:
+        edgethr = options.edgethr
+    edge_map_list =RCF_singlescale.produce_edge_map(input_list,save_root,gpuid=gpuid, edgeThr=edgethr)
+
+    save_txt = os.path.join(os.path.split(building_list)[0], 'edge_map.txt')
+    fw_obj = open(save_txt, 'w')
+    for i in range(0,len(train_data)):
+        fw_obj.writelines('%s %s\n' % (train_data[i].image, edge_map_list[i]))
+    fw_obj.close()
+
+
+if __name__=='__main__':
+    usage = "usage: %prog [options] test_lis_file"
+    parser = OptionParser(usage=usage, version="1.0 2017-5-20")
+
+    parser.add_option("-p", "--gpuid", action="store", dest="gpuid",type='int',
+                      help="the id of gpu want to process")
+
+    parser.add_option("-t", "--edgeThr", action="store", dest="edgeThr",type='int',
+                      help="Pixel value which is smaller than edgeThr will be set as 0, it means edge")
+
+    (options, args) = parser.parse_args()
+    main(options, args)
