@@ -157,8 +157,8 @@ def main(options, args):
     edgethr = 100
     if options.gpuid is not None:
         gpuid = options.gpuid
-    if options.edgethr is not None:
-        edgethr = options.edgethr
+    if options.edgeThr is not None:
+        edgethr = options.edgeThr
     edge_map_list =RCF_singlescale.produce_edge_map(input_list,save_root,gpuid=gpuid, edgeThr=edgethr)
 
     save_txt = os.path.join(os.path.split(building_list)[0], 'edge_map.txt')
