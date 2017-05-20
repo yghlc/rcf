@@ -150,7 +150,7 @@ def main(options, args):
 
     # if convert_groudT_to_groudEdge() is False:
     #     exit(1)
-    save_root='edge_map'
+    save_root= os.path.join(os.getcwd(),'edge_map')
     io_function.mkdir(save_root)
     input_list = [item.image for item in train_data]
     gpuid =0
