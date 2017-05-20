@@ -76,6 +76,7 @@ def read_train_data(train_file,file_id=None):
                 continue
             sample = SampleClass()
             sample.image = temp[0]
+            print 'need step'
             if len(temp) > 1:
                 sample.groudT = temp[1]
                 train_data.append(sample)
