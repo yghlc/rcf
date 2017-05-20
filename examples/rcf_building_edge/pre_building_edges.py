@@ -71,6 +71,7 @@ def read_train_data(train_file,file_id=None):
     else:
         for i in range(0, len(f_lines)):
             temp = f_lines[i].split()
+            print temp
             if len(temp) < 1:
                 continue
             sample = SampleClass()
@@ -169,7 +170,7 @@ def main(options, args):
 
 
 if __name__=='__main__':
-    usage = "usage: %prog [options] test_lis_file"
+    usage = "usage: %prog [options] test_list_file"
     parser = OptionParser(usage=usage, version="1.0 2017-5-20")
 
     parser.add_option("-p", "--gpuid", action="store", dest="gpuid",type='int',
