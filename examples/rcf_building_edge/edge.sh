@@ -2,8 +2,11 @@
 
 expr=~/experiment/caffe_deeplab/aoi_2
 code_path=~/codes/rcf/examples/rcf_building_edge
-file_list=trainval_aug.txt
-gpuid=1
+
+file_list=${1}
+gpuid=${2}
+
+echo file_list: ${file_list} , GPU ID: ${gpuid}
 
 cd ${code_path}
 git pull
