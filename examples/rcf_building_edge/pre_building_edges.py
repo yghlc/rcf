@@ -71,15 +71,15 @@ def read_train_data(train_file,file_id=None):
     else:
         for i in range(0, len(f_lines)):
             temp = f_lines[i].split()
-            print temp
+            # print temp
             if len(temp) < 1:
                 continue
             sample = SampleClass()
             sample.image = temp[0]
-            print 'need step'
+            # print 'need step'
             if len(temp) > 1:
                 sample.groudT = temp[1]
-                train_data.append(sample)
+            train_data.append(sample)
 
     # prepare file for pytorch_deeplab_resnet
     if len(train_data)< 1:
