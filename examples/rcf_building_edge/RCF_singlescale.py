@@ -16,7 +16,8 @@ import cv2
 import time
 
 # Make sure that caffe is on the python path:
-caffe_root = '../../'  # this file is expected to be in {caffe_root}/examples/hed/
+HOME = os.path.expanduser('~')
+caffe_root = HOME+'/codes/rcf/'  # this file is expected to be in {caffe_root}/examples/hed/
 import sys
 sys.path.insert(0, caffe_root + 'python')
 
