@@ -97,7 +97,7 @@ def read_train_data(train_file,file_id=None):
         # check ground path
         # if len(sample.groudT)>0 and os.path.isfile(sample.groudT) is False:
         #     sample.groudT = os.path.basename(sample.groudT)
-        if  os.path.isfile(sample.groudT) is False:
+        if  len(sample.groudT) > 0 and os.path.isfile(sample.groudT) is False:
             basic.outputlogMessage('error, file not exist: %s' % sample.groudT)
             return False
 
