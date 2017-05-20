@@ -17,5 +17,5 @@ cp ${code_path}/pre_building_edges.py .
 cp ${code_path}/test.prototxt .
 cp ${code_path}/rcf_pretrained_bsds.caffemodel .
 
-python pre_building_edges.py ${file_list} --gpuid=${gpuid} --edgeThr=150
+python pre_building_edges.py ${file_list} --gpuid=${gpuid} --edgeThr=200
 
